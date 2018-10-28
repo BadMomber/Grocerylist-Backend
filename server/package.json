@@ -1,0 +1,32 @@
+{
+  "name": "fwe-ha-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "NODE_ENV=test mocha --exit",
+    "start": "node server.js",
+    "dev": "NODE_ENV=dev nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://code.fbi.h-da.de/istkekrie/fwe-ha-1-749664.git"
+  },
+  "author": "Kersten Kriegbaum",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "config": "^2.0.1",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.4",
+    "mongoose-csv": "^1.1.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.4"
+  }
+}
