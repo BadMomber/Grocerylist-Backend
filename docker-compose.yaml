@@ -1,4 +1,4 @@
-version: "3.5"
+version: "2.4"
 
 services:
   mongodb:
@@ -7,6 +7,17 @@ services:
       - ./data/mongodb/db:/data/db
     ports:
       - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: "fewha1"
+    healthcheck:
+      test: "mongo localhost:27017/fewha1 --quiet  --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)'"
+      interval: 5s
+      timeout: 2s
+      retries: 15
+      start_period: 2s
+    # disable mongodb logging
+    logging:
+      driver: "none"
 
   server:
     image: badmomber/fewha1
@@ -14,7 +25,8 @@ services:
       context: ./server
       dockerfile: Dockerfile
     depends_on:
-      - mongodb
+      mongodb:
+        condition: service_healthy
     ports:
       - "4000:4000"
     environment:
