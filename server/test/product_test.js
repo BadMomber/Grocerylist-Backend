@@ -6,7 +6,7 @@ const should = chai.should();
 
 /** File imports */
 const server = require('../server');
-const beerModel = require('../models/product');
+const Product = require ('../models/product');
 
 /** chai.js plugins */
 chai.use(chaiHttp);
@@ -16,19 +16,19 @@ describe('Product', () => {
 
 	// Clear the database before each run in this block
 	beforeEach(done => {
-		beerModel.deleteMany({}, () => {
+		Product.deleteMany({}, () => {
 			done();
 		});
 	});
 
 
 	// Test the /GET route
-	describe('/GET product', () => {
+	describe('/GET products', () => {
 		// GET product should return an empty array
-		it('should GET all the beers (empty)', (done) => {
+		it('should GET all the products (empty)', (done) => {
 			chai
 				.request(server)
-				.get('/api/product')
+				.get('/api/products')
 				.end((err, res) => {
 					res.should.have.status(200);
 					res.body.should.include.key('data');
@@ -40,20 +40,21 @@ describe('Product', () => {
 	});
 
 	// Test the /DELETE route
-	describe('/DELETE product/:id', () => {
+	describe('/DELETE products/:id', () => {
 		it('it should DELETE a product given the id', (done) => {
 
 			/** Create product model */
-			const product = new beerModel({
-				name: 'Becks Ice',
-				price: 0.99,
-				description: 'Icecold. Taste and feel it'
+			const product = new Product({
+				name: 'Butter',
+				description: 'no low fat',
+				amount: '0.25',
+				unit: 'kilo',
 			});
 			/** Save product and test it */
 			product.save((err, product) => {
 				chai
 					.request(server)
-					.delete('/api/product/' + product.id)
+					.delete('/api/products/' + product._id)
 					.end((err, res) => {
 						res.should.have.status(204);
 						done();
@@ -65,27 +66,29 @@ describe('Product', () => {
 	/**
 	 * Test /GET/:id route
 	 */
-	describe('/GET product/:id ', () => {
+	describe('/GET products/:id ', () => {
 		it('it should GET a product by the given id', (done) => {
 			/** Create product model */
-			const product = new beerModel({
-				name: 'Becks Ice',
-				price: 0.99,
-				description: 'Icecold. Taste and feel it'
+			const product = new Product({
+				name: 'Water',
+				description: 'sparkling',
+				amount: '12',
+				unit: 'bottles',
 			});
 
 			product.save((err, product) => {
 				chai
 					.request(server)
-					.get('/api/product/' + product.id)
+					.get('/api/products/' + product._id)
 					.send(product)
 					.end((err, res) => {
 						res.should.have.status(200);
 						res.body.should.include.key('data');
 						res.body.data.should.be.a('object');
 						res.body.data.should.have.property('name');
-						res.body.data.should.have.property('price');
 						res.body.data.should.have.property('description');
+						res.body.data.should.have.property('amount');
+						res.body.data.should.have.property('unit');
 						res.body.data.should.have.property('_id').eql(product.id);
 						done();
 					});
@@ -94,47 +97,83 @@ describe('Product', () => {
 	});
 
 	/**
-	 * Test create beers
+	 * Test create products
 	 */
-	describe('/POST product', () => {
+	describe('/POST products', () => {
 		// Functional test
 		it('it should POST a correct product', (done) => {
 			/** Create product model */
-			const product = new beerModel({
-				name: 'Becks Ice',
-				price: 0.99,
-				description: 'Icecold. Taste and feel it'
+			const product = new Product({
+				name: 'Water',
+				description: 'sparkling',
+				amount: '12',
+				unit: 'bottles',
 			});
 
 			chai.request(server)
-				.post('/api/product')
+				.post('/api/products')
 				.send(product)
 				.end((err, res) => {
 					res.should.have.status(201);
 					res.body.should.include.key('data');
 					res.body.data.should.be.a('object');
 					res.body.data.should.have.property('name');
-					res.body.data.should.have.property('price');
 					res.body.data.should.have.property('description');
+					res.body.data.should.have.property('amount');
+					res.body.data.should.have.property('unit');
 					done();
 				});
 		});
 	});
+	
+	describe('/POST products', () => {
+		// Functional test
+		it('it should POST a correct product with Detected price', (done) => {
+			/** Create product model */
+			const product = new Product({
+				name: 'Water',
+				description: 'sparkling',
+				amount: '12',
+				unit: 'bottles',
+				gtin: '4000401010284'
+			});
+			
+			chai.request(server)
+				.post('/api/products')
+				.send(product)
+				.end((err, res) => {
+					res.should.have.status(201);
+					res.body.should.include.key('data');
+					res.body.data.should.be.a('object');
+					res.body.data.should.have.property('name');
+					res.body.data.should.have.property('description');
+					res.body.data.should.have.property('amount');
+					res.body.data.should.have.property('unit');
+					res.body.data.should.have.property('gtin');
+					res.body.data.should.have.property('price');
+					done();
+				});
+		}).timeout(20000);
+	});
 
-	// Non working tests to make sure beers have required fields
+	// Non working tests to make sure products have required fields
 	it('should not POST a product without name field', (done) => {
 		const product = {};
 		chai.request(server)
-			.post('/api/product')
+			.post('/api/products')
 			.send(product)
 			.end((err, res) => {
-				res.should.have.status(400);
+				res.should.have.status(500);
 				res.body.should.be.a('object');
 				res.body.should.have.property('errors');
-				res.body.errors.should.have.property('price');
 				res.body.errors.should.have.property('name');
-				res.body.errors.price.should.have.property('kind').eql('required');
+				res.body.errors.should.have.property('description');
+				res.body.errors.should.have.property('amount');
+				res.body.errors.should.have.property('unit');
 				res.body.errors.name.should.have.property('kind').eql('required');
+				res.body.errors.description.should.have.property('kind').eql('required');
+				res.body.errors.amount.should.have.property('kind').eql('required');
+				res.body.errors.unit.should.have.property('kind').eql('required');
 				done();
 			});
 	});

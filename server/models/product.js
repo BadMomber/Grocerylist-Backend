@@ -1,20 +1,25 @@
 /** Package imports */
-const mongoose = require('mongoose');
+const mongoose = require ('mongoose');
+const mongoose_csv = require('mongoose-csv');
 
-const ProductSchema = new mongoose.Schema({
+/** Initialize Schema */
+const Schema = mongoose.Schema;
+
+/** Setup Schema */
+const productSchema = new Schema ({
 	name: {
 		type: String,
 		required: 'Enter a product name.'
 	},
-	beschreibung: {
+	description: {
 		type: String,
 		required: 'Enter a product description or additional information.'
 	},
-	menge: {
+	amount: {
 		type: Number,
 		required: 'Enter the amount you want.'
 	},
-	einheit: {
+	unit: {
 		type: String,
 		required: 'Enter the products common unit.'
 	},
@@ -26,19 +31,22 @@ const ProductSchema = new mongoose.Schema({
 		type: Date,
 		default: null
 	},
-	gekauft: {
+	purchased: {
 		type: Boolean,
 		default: false
 	},
-	isbn: {
+	gtin: {
 		type: String,
 		required: false,
 		default: null
 	},
-	preis: {
+	price: {
 		type: String,
 		required: false
 	}
 });
 
-module.exports = ProductSchema;
+/** Write CSV export plugin on schema */
+productSchema.plugin(mongoose_csv);
+
+module.exports = mongoose.model('Product', productSchema);

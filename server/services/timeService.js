@@ -23,4 +23,4 @@ function getTimeStamp() {
 module.exports = {
     getDateTime: getDateTime,
     getTimeStamp: getTimeStamp
-}
+};

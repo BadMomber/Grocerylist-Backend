@@ -1,37 +1,48 @@
 /** Package imports */
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+const bodyParser = require ('body-parser');
+const express = require ('express');
+const mongoose = require ('mongoose');
+const cors = require('cors');
 
-/** File imports */
-const timeService = require('./services/timeService');
-const db = require('./config/db');
+/** File import */
+const timeService = require ('./services/timeService');
+const router = require('./app/controller/router');
+const config = require ('./config/config');
 
-/** Initializers */
-const dbConnection = mongoose.connection;
-const app = express();
-const port = db.port;
+/** Initialize db connection string */
+const dbConnection = config.db.host + ":" + config.db.port + "/" + config.db.name;
+
+/** Connect to mongoose */
+mongoose.connect (
+	dbConnection,
+	{
+		useNewUrlParser: true,
+	},
+	console.log ('> Mongoose is connected.'),
+	console.log ('> Using database', config.db.name)
+);
+
+/** Initialize express */
+const app = express ();
+
+/** Middleware */
+app.use(cors());
+app.use (bodyParser.urlencoded ({extended: true}));
+app.use (bodyParser.json ());
+app.use (bodyParser.text ());
 
 
-app.use(bodyParser.urlencoded({
-	extended: true
-}));
-
-
-mongoose.set('bufferCommands', false);
-mongoose.Promise = global.Promise;
-mongoose.connect(db.url, (err, database) => {
-	if (err) return console.log(err)
-	require('./app/routes')(app, database);
-	app.listen(port, () => {
-		console.log("> We are live on " + port);
-	});
+/** Routes */
+app.get ('/', (req, res) => {
+	res.send ('Hello World');
 });
 
+app.use ('/api', router.router);
 
-dbConnection.on('error', console.error.bind(console, 'connection error:'));
-dbConnection.once('open', function () {
-	console.log();
-	console.log(timeService.getDateTime());
-	console.log('> Mongoose is connected.');
-});
+console.log (timeService.getDateTime ());
+console.log ('We are live on', config.app.port);
+
+app.listen (config.app.port);
+
+/** Exports */
+module.exports = app;
