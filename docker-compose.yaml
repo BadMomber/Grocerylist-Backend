@@ -1,0 +1,26 @@
+version: "3.5"
+
+services:
+  mongodb:
+    image: mongo
+    volumes:
+      - /data/mongodb/db:/data/db
+    ports:
+      - "27017:27017"
+
+  server:
+    image: badmomber/fewha1
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    depends_on:
+      - mongodb
+    ports:
+      - "4000:4000"
+    environment:
+      PORT: 4000
+      MONGODB_HOST: "mongodb"
+      MONGODB_PORT: 27017
+      MONGODB_NAME: "fewha1"
+    # command: sh -c './bin/wait-for mongodb:27017 -t 30 -- node server.js'
+    
