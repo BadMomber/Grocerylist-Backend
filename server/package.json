@@ -4,9 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "NODE_ENV=test mocha --exit",
-    "live": "NODE_ENV=live node server.js",
-    "dev": "NODE_ENV=dev nodemon server.js"
+    "test": "NODE_ENV=test MONGODB_NAME=fweha1_test mocha --exit",
+    "live": "NODE_ENV=live MONGODB_NAME=fweha1_live node server.js",
+    "dev": "NODE_ENV=dev MONGODB_NAME=fweha1 nodemon server.js"
   },
   "repository": {
     "type": "git",

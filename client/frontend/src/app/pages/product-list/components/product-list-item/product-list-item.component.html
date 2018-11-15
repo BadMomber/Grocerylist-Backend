@@ -1,0 +1,36 @@
+<div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 zoom-glow-on-hover">
+  <div class="card text-center">
+    <a [routerLink]="product._id">
+      <div class="card-body">
+      <span class="card-heading"><h2
+        class="card-header">{{product.name}}</h2></span>
+        <p class="card-text">{{product.description}}</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <span class="product-amount">Menge: {{product.amount}}</span>
+          <span class="product-unit"> - {{product.unit}}</span>
+        </li>
+        <li class="list-group-item">
+          <span class="product-price">{{product.price}}€</span>
+          <span class="product-price-summed">{{product.priceSummed}}€</span>
+        </li>
+      </ul>
+    </a>
+    <hr>
+    <div class="card-body">
+      <div class="btn-group" role="group" aria-label="Basic example">
+
+        <button (click)="onDeleteClicked()"
+                class="btn btn-primary btn-no-border icon-delete"><i
+          class="far fa-times-circle fa-2x"></i></button>
+
+        <button (click)="onDoneClicked()"
+                class="btn btn-primary btn-no-border icon-done"><i
+          class="far fa-check-circle fa-2x"></i></button>
+
+      </div>
+    </div>
+
+  </div>
+</div>

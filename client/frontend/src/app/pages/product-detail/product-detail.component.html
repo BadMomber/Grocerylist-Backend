@@ -1,0 +1,92 @@
+<div *ngIf="mode === 'view'">
+
+
+  <div class="container">
+
+    <div class="row justify-content-center">
+
+      <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <h2 class="product-name">{{ product.name }}</h2>
+        <h3 class="amount">{{ product.amount }} {{ product.unit }}</h3>
+        <h4>{{ product.description}}</h4><br>
+        <br>
+        <h5 class="product-price">{{ product.price }} €</h5><br>
+        <h5 class="product-price-sum">{{ product.priceSummed }} €</h5>
+
+      </div>
+
+    </div>
+
+    <div class="row justify-content-center">
+
+      <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+
+        <button class="btn btn-primary btn-edit"
+                (click)="onEditClicked()">Bearbeiten
+        </button>
+        <button class="btn btn-secondary btn-back"
+                (click)="onBackClicked()">Zurück
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div *ngIf="mode === 'edit'">
+
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+
+        <form>
+          <label for="name">name</label><input
+          class="form-control form-control-lg" id="name" name="name" type="text"
+          placeholder="name"
+          [(ngModel)]="product.name">
+          <label for="description">description</label><input
+          class="form-control form-control-lg" id="description"
+          name="description" type="text"
+          placeholder="description"
+          [(ngModel)]="product.description">
+          <label for="amount">Amount</label><input
+          class="form-control form-control-lg" id="amount"
+          name="amount" type="text"
+          placeholder="Amount"
+          [(ngModel)]="product.amount">
+          <label for="unit">Unit</label><input
+          class="form-control form-control-lg" id="unit"
+          name="unit" type="text"
+          placeholder="Unit"
+          [(ngModel)]="product.unit">
+          <label for="price">category</label><input
+          class="form-control form-control-lg" id="category" name="category"
+          type="text" placeholder="category"
+          [(ngModel)]="product.category">
+          <label for="gtin">GTIN</label><input
+          class="form-control form-control-lg" id="gtin" name="gtin"
+          type="text"
+          placeholder="GTIN"
+          [(ngModel)]="product.gtin">
+          <label for="price">price</label><input
+          class="form-control form-control-lg" id="price" name="price"
+          type="text" placeholder="price"
+          [(ngModel)]="product.price">
+        </form>
+        <button class="btn btn-success" (click)="onSaveClicked()">Save</button>
+        <button class="btn btn-hint" (click)="onBackClicked()">Cancel</button>
+        <button class="btn btn-warning" (click)="onDeleteClicked()">Delete
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

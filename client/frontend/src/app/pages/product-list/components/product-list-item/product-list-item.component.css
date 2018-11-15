@@ -1,0 +1,21 @@
+.icon-delete,
+.icon-done {
+  min-width: 0px;
+  padding: 0 2rem;
+  color: #939BA3; }
+
+.icon-done:hover {
+  transition: 0.25s;
+  color: #3EF64A;
+  text-shadow: 0 0 10px #3EF64A; }
+
+.icon-delete:hover {
+  transition: 0.25s;
+  color: #EC413B;
+  text-shadow: 0 0 10px #EC413B; }
+
+.done .icon-done {
+  color: #3EF64A;
+  text-shadow: 0 0 10px #3EF64A; }
+
+/*# sourceMappingURL=product-list-item.component.css.map */

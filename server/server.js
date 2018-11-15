@@ -10,7 +10,7 @@ const router = require('./app/controller/router');
 const config = require ('./config/config');
 
 /** Initialize db connection string */
-const dbConnection = config.db.host + ":" + config.db.port + "/" + config.db.name;
+const dbConnection = "mongodb://" + config.db.host + ":" + config.db.port + "/" + config.db.name;
 
 /** Connect to mongoose */
 mongoose.connect (

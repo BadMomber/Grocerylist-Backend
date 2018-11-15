@@ -1,0 +1,11 @@
+@import '../../../partials/colors';
+.product-name {
+  transition: 0.5s;
+  color: $secondary-color;
+  text-shadow: 0 0 10px $secondary-color;
+}
+.product-price-sum {
+  font-size: 3rem;
+  color: $success-color;
+  text-shadow: 0 0 5px $success-color;
+}

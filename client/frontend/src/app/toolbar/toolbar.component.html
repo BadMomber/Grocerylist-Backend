@@ -1,0 +1,56 @@
+<div class="container-fluid container-header">
+  <div class="row align-items-center">
+
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 text-left">
+      <p class="logo"><a routerLink="/" routerLinkActive="active">
+        grocerylist
+      </a></p>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
+
+      <a routerLink="/product-list/new-product">
+        <button
+          class="btn btn-primary btn-no-border">
+          <i
+          class="fas fa-plus fa-lg"></i>
+        </button>
+      </a>
+
+      <button class="btn btn-primary list-view btn-no-border"
+              (click)="onDownloadClicked()"><i
+        class="fas fa-file-download fa-lg"></i>
+      </button>
+
+      <button class="btn btn-primary list-view btn-no-border"
+              onclick="listView()"><i class="fas fa-list fa-lg"></i></button>
+
+      <button class="btn btn-primary grid-view btn-no-border"
+              onclick="gridView()"><i class="fas fa-th-large fa-lg"></i>
+      </button>
+
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+</div>
+
+<!-- Smily checkbox
+      <div id="container">
+        <div class="toggle">
+          <input type="checkbox" name="toggle" class="check-checkbox" id="mytoggle">
+          <label class="check-label" for="mytoggle">
+            <div id="background"></div>
+            <span class="face">
+        <span class="face-container">
+          <span class="eye left"></span>
+          <span class="eye right"></span>
+          <span class="mouth"></span>
+        </span>
+      </span>
+          </label>
+        </div>
+      </div>
+      -->

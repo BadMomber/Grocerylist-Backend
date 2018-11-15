@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+
+    <form>
+      <label for="name">name</label><input
+      class="form-control form-control-lg" id="name" name="name" type="text"
+      placeholder="name"
+      [(ngModel)]="product.name">
+      <label for="description">description</label><input
+      class="form-control form-control-lg" id="description"
+      name="description" type="text"
+      placeholder="description"
+      [(ngModel)]="product.description">
+      <label for="amount">Amount</label><input
+      class="form-control form-control-lg" id="amount"
+      name="amount" type="text"
+      placeholder="Amount"
+      [(ngModel)]="product.amount">
+      <label for="unit">Unit</label><input
+      class="form-control form-control-lg" id="unit"
+      name="unit" type="text"
+      placeholder="Unit"
+      [(ngModel)]="product.unit">
+      <label for="price">category</label><input
+      class="form-control form-control-lg" id="category" name="category"
+      type="text" placeholder="category"
+      [(ngModel)]="product.category">
+      <label for="gtin">GTIN</label><input
+      class="form-control form-control-lg" id="gtin" name="gtin"
+      type="text"
+      placeholder="GTIN"
+      [(ngModel)]="product.gtin">
+      <label for="price">price</label><input
+      class="form-control form-control-lg" id="price" name="price"
+      type="text" placeholder="price"
+      [(ngModel)]="product.price">
+    </form>
+
+  </div>
+  <button class="btn btn-success" (click)="onSaveClicked()">Save</button>
+  <button class="btn btn-hint" (click)="onBackClicked()">Cancel</button>
+</div>

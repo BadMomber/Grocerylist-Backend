@@ -1,0 +1,31 @@
+<div class="col-12 text-center stretch">
+  <button type="button" class="btn btn-secondary"
+          (click)="onShowDoneClicked()">Done
+  </button>
+  <button type="button" class="btn btn-secondary"
+          (click)="onShowOpenClicked()">Open
+  </button>
+  <button type="button" class="btn btn-secondary"
+          (click)="onShowAllClicked()">All
+  </button>
+</div>
+
+<div *ngIf="products.length > 0">
+
+  <div *ngIf="this.view === 'all'">
+    <app-product-list-item *ngFor="let product of products"
+                           [productListItem]="product"></app-product-list-item>
+  </div>
+
+  <div *ngIf="this.view === 'bought'">
+    <app-product-list-item *ngFor="let product of boughtProducts"
+                           [productListItem]="product"></app-product-list-item>
+  </div>
+
+  <div *ngIf="this.view === 'open'">
+    <app-product-list-item *ngFor="let product of openProducts"
+                           [productListItem]="product"></app-product-list-item>
+  </div>
+
+</div>
+<div *ngIf="products.length == 0"><h1>No products on the list yet</h1></div>

@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACA,aAAc;EACZ,UAAU,EAAE,IAAI;EAChB,KAAK,ECEW,OAAO;EDDvB,WAAW,EAAE,gBAAyB;;AAExC,kBAAmB;EACjB,SAAS,EAAE,IAAI;EACf,KAAK,ECAS,OAAO;EDCrB,WAAW,EAAE,eAAsB",
+"sources": ["product-detail.component.scss","../../../partials/colors.scss"],
+"names": [],
+"file": "product-detail.component.css"
+}

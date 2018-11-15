@@ -4,13 +4,13 @@ services:
   mongodb:
     image: mongo
     volumes:
-      - ./data/mongodb/db:/data/db
+    - ./data/mongodb/db:/data/db
     ports:
-      - "27017:27017"
+    - "27017:27017"
     environment:
-      MONGO_INITDB_DATABASE: "fewha1"
+      MONGO_INITDB_DATABASE: "fweha1"
     healthcheck:
-      test: "mongo localhost:27017/fewha1 --quiet  --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)'"
+      test: "mongo localhost:27017/fweha1 --quiet  --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)'"
       interval: 5s
       timeout: 2s
       retries: 15
@@ -20,7 +20,7 @@ services:
       driver: "none"
 
   server:
-    image: badmomber/fewha1
+    image: badmomber/fweha1
     build:
       context: ./server
       dockerfile: Dockerfile
@@ -28,9 +28,9 @@ services:
       mongodb:
         condition: service_healthy
     ports:
-      - "4000:4000"
+    - "4000:4000"
     environment:
       PORT: 4000
       MONGODB_HOST: "mongodb"
       MONGODB_PORT: 27017
-      MONGODB_NAME: "fewha1"
+      MONGODB_NAME: "fweha1"

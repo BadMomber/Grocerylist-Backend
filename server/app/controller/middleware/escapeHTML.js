@@ -1,5 +1,7 @@
 module.exports = function escapeHTML(s) {
-	return s.replace(/&/g, '&amp;')
-		.replace(/</g, '&lt;')
-		.replace(/>/g, '&gt;');
+  if (s.includes ('&') || s.includes ('<') || s.includes ('>')) {
+    return false;
+  } else {
+    return true;
+  }
 };

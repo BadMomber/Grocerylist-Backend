@@ -1,0 +1,27 @@
+@import "../../../../../partials/colors";
+
+.icon-delete,
+.icon-done {
+  min-width: 0px;
+  padding: 0 2rem;
+  color: $grey;
+}
+
+.icon-done:hover {
+  transition: 0.25s;
+  color: $success-color;
+  text-shadow: 0 0 10px $success-color;
+}
+
+.icon-delete:hover {
+  transition: 0.25s;
+  color: $warning-color;
+  text-shadow: 0 0 10px $warning-color;
+}
+
+.done {
+  .icon-done {
+    color: $success-color;
+    text-shadow: 0 0 10px $success-color;
+  }
+}
