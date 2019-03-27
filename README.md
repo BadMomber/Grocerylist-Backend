@@ -1,4 +1,4 @@
-# FWE-WS18-19-749664-HA1 - Grocery list API
+# Grocery list API
 
 ## Table of contents
 
